@@ -12,8 +12,8 @@
     top: 0;
     background-image: url("mouse.gif");
     background-size: contain;
-    width: 230px;
-    height: 230px;
+    width: 250px;
+    height: 250px;
   
     
   }
@@ -64,40 +64,28 @@
         // Apply the rotation to the mouse
         mouse.style.transform = "rotate(" + rotationAngle + "rad)";
         //Prendi l'immagine
-var img = document.getElementById("myGif");
-
-//Crea un canvas
-var canvas = document.createElement("canvas");
-
-//Prendi il context del canvas
-var ctx = canvas.getContext("2d");
-
-//Imposta la larghezza e l'altezza del canvas uguale a quelle dell'immagine
-canvas.width = img.width;
-canvas.height = img.height;
-
-//Disegna l'immagine sull' canvas
-ctx.drawImage(img, 0, 0);
-
-//Ruota l'immagine di 180 gradi
-ctx.translate(img.width, img.height);
-ctx.rotate(Math.PI);
-
-//Disegna l'immagine specchiata
-ctx.drawImage(img, 0, 0);
-
-//Sostituisci l'immagine originale con la specchiata
-document.getElementById("myGif").src = './mouse.gif';
       
     }
 
     // Move the mouse every 5 milliseconds
     setInterval(movemouse, 5);
-
-    // Add an event listener to the mouse element
-    // When the mouse element is clicked, play the squit sound
-    
-    mouse.addEventListener("click", function() {document.getElementById("squit").play();
+	// Add an event listener to the mouse element
+	// When the mouse element is clicked, play the squit sound
+	// And change the image to static for 3 seconds
+    mouse.addEventListener("click", function() {
+      document.getElementById("squit").play(); 
+      speedX = 0;
+      speedY = 0;
+      mouse.style.backgroundImage = "url('static_mouse.gif')";
+      mouse.style.width = (width/1.5) + 'px';
+      mouse.style.height = (height/1.5) + 'px';
+      setTimeout(function(){ 
+        mouse.style.backgroundImage = "url('mouse.gif')"; 
+        mouse.style.width = width + 'px';
+        mouse.style.height = height + 'px';
+        speedX = 2;
+        speedY = 2;
+      }, 3000);
     });
 
   </script>
